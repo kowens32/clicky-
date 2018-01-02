@@ -19,13 +19,58 @@ class Board extends React.Component {
             squares: Array(9).fill(null),
         }
     }
+
+
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({squares: squares});
+    }
+
+    renderSquare(i) {
+        return (<Square
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}/>
+        );
+
+    }
+
+    render() {
+        const status = 'Next player: x';
+        return (
+            <div>
+        <div className="status">{status}</div>
+            <div className="board-row">
+            {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}{this.renderSquare(3)}
+            </div>
+        <div className="board-row">
+          {this.renderSquare(4)}{this.renderSquare(5)}{this.renderSquare(6)}{this.renderSquare(7)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(8)}{this.renderSquare(9)}{this.renderSquare(10)}{this.renderSquare(11)}
+        </div>
+
+        </div>
+        );
+   }
+
+       }
+class Game extends React.Component {
+    render () {
+        return (
+            <div className="game">
+            <div className="game-board">
+                <Board />
+            </div>
+                <div className="game-info"> </div>
+                </div>
+        );
+    }
 }
 
 
-
-
 //===============================
-React.DOM.render(
-    <Game />
+ReactDOM.render(
+    <Game />,
     document.getElementById('root')
 )
