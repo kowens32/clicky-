@@ -36,12 +36,19 @@ class Board extends React.Component {
     }
 
     render() {
-        const status = 'Next player: x';
+        const status = 'Click an image to start!';
+
+        let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
+            'ProfessorAlbusDumbledore', 'ProfessorMinervaMcGonagall', 'ProfessorSeverusSnape', 'RonWeasley', 'RubeusHagrid', 'SiriusBlack']
+       let images = array.map(image => {
+           return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive" />
+       });
         return (
             <div>
         <div className="status">{status}</div>
             <div className="board-row">
             {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}{this.renderSquare(3)}
+                {images}
             </div>
         <div className="board-row">
           {this.renderSquare(4)}{this.renderSquare(5)}{this.renderSquare(6)}{this.renderSquare(7)}
