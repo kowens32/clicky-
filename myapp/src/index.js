@@ -16,20 +16,28 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            squares: Array(9).fill(null),
+            images: Array(9).fill(null),
         }
     }
 
 
     handleClick(i) {
-        const squares = this.state.squares.slice();
-        squares[i] = 'X';
-        this.setState({squares: squares});
+        const images = this.state.images.slice();
+        images[i] = 'X';
+        this.setState({images: images});
     }
 
     renderSquare(i) {
+
+        let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
+            'ProfessorAlbusDumbledore', 'ProfessorMinervaMcGonagall', 'ProfessorSeverusSnape', 'RonWeasley', 'RubeusHagrid', 'SiriusBlack']
+        let images = array.map(image => {
+            return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive" />
+        });
+
         return (<Square
-                value={this.state.squares[i]}
+
+                value={images[i]}
                 onClick={() => this.handleClick(i)}/>
         );
 
@@ -37,18 +45,18 @@ class Board extends React.Component {
 
     render() {
         const status = 'Click an image to start!';
-
-        let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
-            'ProfessorAlbusDumbledore', 'ProfessorMinervaMcGonagall', 'ProfessorSeverusSnape', 'RonWeasley', 'RubeusHagrid', 'SiriusBlack']
-       let images = array.map(image => {
-           return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive" />
-       });
+       //
+       //  let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
+       //      'ProfessorAlbusDumbledore', 'ProfessorMinervaMcGonagall', 'ProfessorSeverusSnape', 'RonWeasley', 'RubeusHagrid', 'SiriusBlack']
+       // let images = array.map(image => {
+       //     return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive" />
+       // });
         return (
             <div>
         <div className="status">{status}</div>
             <div className="board-row">
             {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}{this.renderSquare(3)}
-                {images}
+
             </div>
         <div className="board-row">
           {this.renderSquare(4)}{this.renderSquare(5)}{this.renderSquare(6)}{this.renderSquare(7)}
