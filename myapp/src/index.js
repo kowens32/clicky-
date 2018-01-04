@@ -20,16 +20,18 @@ class Board extends React.Component {
         }
     }
 
+
+
     handleClick(i) {
 
-        const images = this.state.images.sort(function(){return 0.5 - Math.random()});
+        const images = this.state.images.slice();
         images[i] = 'clicked';
         this.setState({images: images});
 
 
-
-
     }
+
+
 
     renderSquare(i) {
         let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
@@ -40,7 +42,7 @@ class Board extends React.Component {
             return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive"
             />
         });
-
+        images.sort(function(){return 0.5 - Math.random()})
         return (<Square
                 value={images[i]}
                 onClick={() => this.handleClick(i)}/>
