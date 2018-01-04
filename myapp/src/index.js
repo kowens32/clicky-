@@ -22,17 +22,22 @@ class Board extends React.Component {
 
     handleClick(i) {
 
-        const images = this.state.images.slice();
+        const images = this.state.images.sort(function(){return 0.5 - Math.random()});
         images[i] = 'clicked';
         this.setState({images: images});
+
+
+
+
     }
 
     renderSquare(i) {
         let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
             'ProfessorAlbusDumbledore', 'ProfessorMinervaMcGonagall', 'ProfessorSeverusSnape', 'RonWeasley', 'RubeusHagrid', 'SiriusBlack']
-        let images = array.map(image => {
-            return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive"
 
+        let images = array.map(image => {
+
+            return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive"
             />
         });
 
@@ -42,6 +47,7 @@ class Board extends React.Component {
         );
 
     }
+
 
     render() {
         const status = 'Click an image to start!';
@@ -83,4 +89,4 @@ class Game extends React.Component {
 ReactDOM.render(
     <Game />,
     document.getElementById('root')
-)
+);
