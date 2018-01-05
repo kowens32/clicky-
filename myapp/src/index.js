@@ -1,55 +1,76 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-class Square extends React.Component {
-    render() {
-        return(
-            <button className="square" onClick={() => this.props.onClick()}>
-                {this.props.value}
-            </button>
-        );
-    }
-}
-
 class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: Array(9).fill(null),
+            images: [
+                {
+                    name: 'BellatrixLestrange',
+                    clicked: false
+                },
+                {
+                    name: 'DracoMalfoy',
+                    clicked: false
+                },
+                {
+                    name: 'GinnyWeasley',
+                    clicked: false
+                },
+                {
+                    name: 'HermioneGranger',
+                    clicked: false
+                },
+                {
+                    name: 'LordVoldemort',
+                    clicked: false
+                },
+                {
+                    name: 'NymphadoraLupin',
+                    clicked: false
+                },
+                {
+                    name: 'ProfessorAlbusDumbledore',
+                    clicked: false
+                },
+                {
+                    name: 'ProfessorMinervaMcGonagall',
+                    clicked: false
+                },
+                {
+                    name: 'ProfessorSeverusSnape',
+                    clicked: false
+                },
+                {
+                    name: 'RonWeasley',
+                    clicked: false
+                },
+                {
+                    name: 'RubeusHagrid',
+                    clicked: false
+                },
+                {
+                    name: 'SiriusBlack',
+                    clicked: false
+                }
+            ]
         }
     }
-
 
 
     handleClick(i) {
 
         const images = this.state.images.slice();
-        images[i] = 'clicked';
+        images[i].clicked ? this.addPoint() : images[i].clicked = true;
+        images.sort(function(a, b){return 0.5 - Math.random()})
         this.setState({images: images});
 
-
     }
 
-
-
-    renderSquare(i) {
-        let array = ['BellatrixLestrange', 'DracoMalfoy', 'GinnyWeasley', 'HermioneGranger', 'LordVoldemort', 'NymphadoraLupin',
-            'ProfessorAlbusDumbledore', 'ProfessorMinervaMcGonagall', 'ProfessorSeverusSnape', 'RonWeasley', 'RubeusHagrid', 'SiriusBlack']
-
-        let images = array.map(image => {
-
-            return <img key={image} src={require(`./img/${image}.jpeg`)} alt="" className="img-responsive"
-            />
-        });
-        images.sort(function(){return 0.5 - Math.random()})
-        return (<Square
-                value={images[i]}
-                onClick={() => this.handleClick(i)}/>
-        );
+    addPoint() {
 
     }
-
 
     render() {
         const status = 'Click an image to start!';
@@ -57,17 +78,17 @@ class Board extends React.Component {
         return (
             <div>
                 <div className="status">{status}</div>
-                <div className="board-row">
-                    {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}{this.renderSquare(3)}
-
+                <div>
+                    {
+                        this.state.images.map((image, index) => {
+                            return <Square
+                                        key={index}
+                                        value={image.name}
+                                        onClick={() => this.handleClick(index)}
+                                   />
+                        })
+                    }
                 </div>
-                <div className="board-row">
-                    {this.renderSquare(4)}{this.renderSquare(5)}{this.renderSquare(6)}{this.renderSquare(7)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(8)}{this.renderSquare(9)}{this.renderSquare(10)}{this.renderSquare(11)}
-                </div>
-
             </div>
         );
     }
@@ -86,6 +107,15 @@ class Game extends React.Component {
     }
 }
 
+class Square extends React.Component {
+    render() {
+        return(
+            <button className="square" onClick={() => this.props.onClick()}>
+                {<img key={this.props.value} src={require(`./img/${this.props.value}.jpeg`)} alt="" className="img-responsive" />}
+            </button>
+        );
+    }
+}
 
 //===============================
 ReactDOM.render(
