@@ -87,7 +87,7 @@ class Board extends React.Component {
         return (
             <div>
                 <div className="status">{status}</div>
-                <div className="score">{this.state.score}</div>
+                <div className="score">Computer Score {this.state.score}</div>
 
                 <div >
                     {
