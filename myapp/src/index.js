@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
+const divStyle = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start'
+
+};
+
 class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            score: 0,
             images: [
                 {
                     name: 'BellatrixLestrange',
@@ -69,16 +78,18 @@ class Board extends React.Component {
     }
 
     addPoint() {
-
+  this.state.score++;
+  console.log('???',this.state.score);
     }
 
     render() {
-        const status = 'Click an image to start!';
-
+        const status = 'Click game to start!';
         return (
             <div>
                 <div className="status">{status}</div>
-                <div>
+                <div className="score">{this.state.score}</div>
+
+                <div >
                     {
                         this.state.images.map((image, index) => {
                             return <Square
@@ -97,9 +108,9 @@ class Board extends React.Component {
 class Game extends React.Component {
     render () {
         return (
-            <div className="game">
+            <div className="game" >
                 <div className="game-board">
-                    <Board />
+                    <Board style={divStyle}/>
                 </div>
                 <div className="game-info"> </div>
             </div>
