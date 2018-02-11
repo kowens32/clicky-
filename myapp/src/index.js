@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Background from './img/background.jpeg';
 
 const divStyle = {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
 
 };
 
@@ -85,9 +85,10 @@ class Board extends React.Component {
     render() {
         const status = 'Click game to start!';
         return (
-            <div>
-                <div className="status">{status}</div>
-                <div className="score">Computer Score {this.state.score}</div>
+            <div className="container" style={{backgroundImage: `url(${Background})`}}>
+            <div >
+                <div className="status" style={{fontFamily: 'Rock Salt', fontSize: '45px'}} align="center">{status}</div>
+                <div className="score" style={{fontFamily: 'Rock Salt', fontSize: '15px'}} align="center">Computer Score {this.state.score}</div>
 
                 <div >
                     {
@@ -101,6 +102,8 @@ class Board extends React.Component {
                     }
                 </div>
             </div>
+
+</div>
         );
     }
 
